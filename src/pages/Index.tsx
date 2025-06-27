@@ -2,7 +2,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { Upload, MessageSquare, Brain, ChartBar, BookOpen, Zap } from "lucide-react";
+import { Upload, MessageSquare, Brain, ChartBar, BookOpen, Zap, Code, BarChart3 } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -10,35 +10,51 @@ const Index = () => {
   const features = [
     {
       icon: <Upload className="h-8 w-8 text-[#1976D2]" />,
-      title: "Smart PDF Upload",
-      description: "Upload your course materials and let our AI parse and organize content by chapters automatically."
+      title: "📄 Smart PDF Upload",
+      subtitle: "Upload your course materials and let our AI organize them into chapters.",
+      route: "/upload",
+      interactive: true
     },
     {
       icon: <Brain className="h-8 w-8 text-[#26A69A]" />,
-      title: "AI Tutor Assistant",
-      description: "Get personalized tutoring with context-aware responses based on your uploaded materials."
+      title: "🧠 AI Tutor Assistant",
+      subtitle: "Ask doubts, explore topics, and get Socratic tutoring from your uploaded content.",
+      route: "/chat",
+      interactive: true
     },
     {
-      icon: <MessageSquare className="h-8 w-8 text-[#1976D2]" />,
-      title: "Interactive Chat",
-      description: "Ask questions and get detailed explanations tailored to your specific study materials."
+      icon: <Code className="h-8 w-8 text-[#1976D2]" />,
+      title: "🔧 Code Analyzer",
+      subtitle: "Analyze your code and receive suggestions and optimized alternatives.",
+      route: "/code-analyzer",
+      interactive: true
     },
     {
-      icon: <BookOpen className="h-8 w-8 text-[#26A69A]" />,
+      icon: <BarChart3 className="h-8 w-8 text-[#26A69A]" />,
+      title: "📊 EDA Insights",
+      subtitle: "Upload a dataset and get summary statistics and visualizations instantly.",
+      route: "/eda-insights",
+      interactive: true
+    },
+    {
+      icon: <BookOpen className="h-8 w-8 text-[#1976D2]" />,
       title: "Auto Quiz Generation",
-      description: "Automatically generate quizzes from each chapter with multiple choice and short answer questions."
+      subtitle: "Automatically generate quizzes from each chapter with multiple choice and short answer questions.",
+      route: "/quiz",
+      interactive: true
     },
     {
-      icon: <ChartBar className="h-8 w-8 text-[#1976D2]" />,
+      icon: <ChartBar className="h-8 w-8 text-[#26A69A]" />,
       title: "Progress Tracking",
-      description: "Monitor your learning progress with detailed analytics and performance insights."
-    },
-    {
-      icon: <Zap className="h-8 w-8 text-[#26A69A]" />,
-      title: "Personalized Study Plans",
-      description: "Get customized study schedules based on your materials and learning pace."
+      subtitle: "Monitor your learning progress with detailed analytics and performance insights.",
+      route: "/dashboard",
+      interactive: true
     }
   ];
+
+  const handleFeatureClick = (route: string) => {
+    navigate(route);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-teal-50">
@@ -70,7 +86,7 @@ const Index = () => {
             <span className="text-[#1976D2]"> Study Companion</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto animate-fade-in">
-            Upload your PDFs, chat with an AI tutor, and get personalized quizzes. 
+            Upload your PDFs, analyze code, explore datasets, and chat with an AI tutor. 
             Transform your study materials into an interactive learning experience.
           </p>
           <div className="flex justify-center space-x-4 animate-fade-in">
@@ -109,7 +125,10 @@ const Index = () => {
             {features.map((feature, index) => (
               <Card 
                 key={index} 
-                className="hover:shadow-lg transition-shadow duration-300 border-0 shadow-md hover-scale"
+                className={`hover:shadow-lg transition-all duration-300 border-0 shadow-md hover-scale ${
+                  feature.interactive ? 'cursor-pointer hover:bg-gray-50' : ''
+                }`}
+                onClick={() => feature.interactive && handleFeatureClick(feature.route)}
               >
                 <CardHeader className="text-center pb-4">
                   <div className="flex justify-center mb-4">
@@ -121,7 +140,7 @@ const Index = () => {
                 </CardHeader>
                 <CardContent>
                   <CardDescription className="text-gray-600 text-center">
-                    {feature.description}
+                    {feature.subtitle}
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -167,8 +186,8 @@ const Index = () => {
               <ul className="space-y-2 text-gray-400">
                 <li>PDF Upload & Parsing</li>
                 <li>AI Tutor Chat</li>
-                <li>Quiz Generation</li>
-                <li>Progress Tracking</li>
+                <li>Code Analysis</li>
+                <li>EDA Insights</li>
               </ul>
             </div>
             <div>

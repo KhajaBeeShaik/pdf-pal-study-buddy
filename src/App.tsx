@@ -11,6 +11,8 @@ import Dashboard from "./pages/Dashboard";
 import ChatInterface from "./pages/ChatInterface";
 import QuizInterface from "./pages/QuizInterface";
 import Profile from "./pages/Profile";
+import CodeAnalyzer from "./pages/CodeAnalyzer";
+import EDAInsights from "./pages/EDAInsights";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +29,8 @@ const App = () => (
           <Route path="/chat" element={<ChatInterface />} />
           <Route path="/quiz" element={<QuizInterface />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/code-analyzer" element={<CodeAnalyzer />} />
+          <Route path="/eda-insights" element={<EDAInsights />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
