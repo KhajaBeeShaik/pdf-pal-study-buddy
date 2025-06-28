@@ -24,7 +24,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+
+    /* add types for vite */
+    "types": ["vite/client"]
   },
   "include": ["src"]
 }
