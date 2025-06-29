@@ -36,6 +36,14 @@ npm i
 npm run dev
 ```
 
+**To run the chatbot backend**
+```sh
+#Open a New Terminal and run
+cd chatbot_backend
+uvicorn app:app --reload --port 9000
+```
+
+
 **Edit a file directly in GitHub**
 
 - Navigate to the desired file(s).
