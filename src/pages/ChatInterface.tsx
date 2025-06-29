@@ -23,7 +23,7 @@ const ChatInterface = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 1,
-      text: "Hello! I'm your AI tutor. I can help you understand concepts from your uploaded PDFs. What would you like to learn about today? \n\nHere are some things I can do:\n* Explain concepts\n* Summarize content\n* Answer questions\n\n```javascript\n// Example code block\nconsole.log('Hello, Markdown!');\n```\n\nThis is **bold text** and this is *italic text*.",
+      text: "Hello! What would you like to learn about today? ",
       isBot: true,
       timestamp: new Date().toLocaleTimeString(),
       isSystem: false // Default to false for the initial message
@@ -40,9 +40,7 @@ const ChatInterface = () => {
   }, [messages]);
 
   const suggestionQuestions = [
-    "Explain the main concepts in Chapter 1",
     "What are the key formulas I should remember?",
-    "Can you create practice problems for me?",
     "Summarize the most important points",
     "What topics should I focus on for the exam?",
     "Help me understand this difficult concept"
