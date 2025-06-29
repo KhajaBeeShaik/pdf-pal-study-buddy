@@ -5,14 +5,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  ArrowLeft, Brain, Code, Zap, CheckCircle, AlertCircle
+  ArrowLeft, Brain, Code, Zap, CheckCircle
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const CodeAnalyzer = () => {
   const navigate = useNavigate();
 
-  // 🧠 State
+  // States
   const [questions, setQuestions] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState("");
@@ -25,7 +25,10 @@ const CodeAnalyzer = () => {
   const [isFetchingHint, setIsFetchingHint] = useState(false);
   const [showHint, setShowHint] = useState(false);
 
-  // 📥 Fetch questions on mount
+  // Sleep function
+  const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+  // Fetch questions on mount
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
@@ -43,7 +46,7 @@ const CodeAnalyzer = () => {
     fetchQuestions();
   }, []);
 
-  // ℹ️ Get instruction for the current question
+  // ℹGet instruction for the current question
   useEffect(() => {
     const fetchInstructions = async () => {
       if (!currentQuestion) return;
@@ -77,7 +80,7 @@ const CodeAnalyzer = () => {
     setShowHint(true);
   };
 
-  // ✅ Submit code for checking
+  // Submit code for checking
   const handleSubmitCode = async () => {
     if (!code.trim()) return;
 
@@ -95,11 +98,12 @@ const CodeAnalyzer = () => {
       if (data.correct) {
         // Move to next question if exists
         if (currentIndex + 1 < questions.length) {
+          await sleep(7000);
           setCurrentIndex(currentIndex + 1);
           setCurrentQuestion(questions[currentIndex + 1]);
           setShowHint(false)
         } else {
-          alert("🎉 You've completed all questions!");
+          alert("You've completed all questions!");
         }
       }
     } catch (err) {
@@ -128,12 +132,12 @@ const CodeAnalyzer = () => {
       <div className="py-8 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* 🧑‍💻 Code Input */}
+            {/* Code Input */}
             <Card className="shadow-lg border-0">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
                   <Code className="h-5 w-5 text-[#1976D2]" />
-                  <span>🔧 Code Input</span>
+                  <span>Code Input</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -142,7 +146,7 @@ const CodeAnalyzer = () => {
                 ) : (
                   <>
                     <p className="mb-4 font-medium text-gray-800">Q{currentQuestion}</p>
-                    {/* <pre className="text-sm mb-2 text-gray-600 whitespace-pre-line">{instructions}</pre> */}
+                    {/* Hint Button */}
                     <Button
                       onClick={handleFetchHint}
                       disabled={isFetchingHint}
@@ -186,7 +190,7 @@ const CodeAnalyzer = () => {
               </CardContent>
             </Card>
 
-            {/* ✅ Feedback Panel */}
+            {/* Feedback Panel */}
             <Card className="shadow-lg border-0">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
