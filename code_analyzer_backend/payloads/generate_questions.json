@@ -1,0 +1,30 @@
+{
+    "action": "query",
+    "request_source": "override_params",
+    "query": "",
+    "model_provider": "openai",
+    "model_name": "gpt4_1",
+    "session_id": "testingsid2000", 
+    "model_params": {
+        "temperature": 0.2,
+        "system_prompt": "",
+        "top_p": 0.9,
+        "top_k": 10,
+        "enable_search": true,
+        "search_params": {
+            "collection": "AI Accelerated Spark Challenge 15", 
+            "source_name": ["cupy_sample_code.py"],
+            "top_k": 10,
+            "reranker": "reranker",
+            "retrieval_type": "neighbor",
+            "output_fields": ["content", "source_name", "source_type"],
+            "prompt_mode": "custom",
+            "search_prompt": "Search for Python (.py) files",
+            "rerank": true,
+            "reranker_model": "amazon_rerank",
+            "reranker_provider": "aws",
+            "top_n": 3,
+            "expr": "source_name != 'Data Science from Scratch by Joel Grus.pdf'"
+        }
+    }
+}
